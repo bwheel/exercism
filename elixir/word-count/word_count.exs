@@ -11,11 +11,11 @@ defmodule Words do
   """
   @spec count(String.t()) :: map
   def count(sentence) do
-    
-    String.replace(sentence, @symbols, "")
+    sentence
+    |> String.replace(@symbols, "")
     |> String.replace(@connector_punctuation, " ")
     |> (&Regex.split(@whites_space, &1)).()
     |> Enum.map( fn word -> String.downcase(word, :default) end )
-    |> Enum.reduce( %{}, fn word, result -> Map.put( result, word, (Map.get(result, word, 0) + 1 ) ) end )
+    |> Enum.reduce( %{}, fn word, count -> Map.update(count, word, 1, &(&1 + 1) )  end )
   end
 end
