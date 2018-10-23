@@ -1,0 +1,14 @@
+C:\Users\byron\exercism\csharp\hamming\bin\Debug\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\byron\exercism\csharp\hamming\bin\Debug\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\byron\exercism\csharp\hamming\bin\Debug\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll
+C:\Users\byron\exercism\csharp\hamming\bin\Debug\netcoreapp2.1\Hamming.deps.json
+C:\Users\byron\exercism\csharp\hamming\bin\Debug\netcoreapp2.1\Hamming.runtimeconfig.json
+C:\Users\byron\exercism\csharp\hamming\bin\Debug\netcoreapp2.1\Hamming.runtimeconfig.dev.json
+C:\Users\byron\exercism\csharp\hamming\bin\Debug\netcoreapp2.1\Hamming.dll
+C:\Users\byron\exercism\csharp\hamming\bin\Debug\netcoreapp2.1\Hamming.pdb
+C:\Users\byron\exercism\csharp\hamming\obj\Debug\netcoreapp2.1\Hamming.csprojAssemblyReference.cache
+C:\Users\byron\exercism\csharp\hamming\obj\Debug\netcoreapp2.1\Hamming.csproj.CoreCompileInputs.cache
+C:\Users\byron\exercism\csharp\hamming\obj\Debug\netcoreapp2.1\Hamming.AssemblyInfoInputs.cache
+C:\Users\byron\exercism\csharp\hamming\obj\Debug\netcoreapp2.1\Hamming.AssemblyInfo.cs
+C:\Users\byron\exercism\csharp\hamming\obj\Debug\netcoreapp2.1\Hamming.dll
+C:\Users\byron\exercism\csharp\hamming\obj\Debug\netcoreapp2.1\Hamming.pdb
