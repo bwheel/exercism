@@ -125,7 +125,7 @@ defmodule PigLatinTest do
       assert PigLatin.translate("yddria") == "yddriaay"
     end
 
-    #@tag :pending
+   #@tag :pending
     test "word beginning with xr" do
       assert PigLatin.translate("xray") == "xrayay"
     end
