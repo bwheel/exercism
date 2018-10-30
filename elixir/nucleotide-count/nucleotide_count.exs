@@ -1,6 +1,6 @@
 defmodule NucleotideCount do
   @nucleotides [?A, ?C, ?G, ?T]
-
+  @nucleotides_histogram %{?A => 0, ?C => 0, ?G => 0, ?T => 0}
   @doc """
   Counts individual nucleotides in a DNA strand.
 
@@ -27,5 +27,6 @@ defmodule NucleotideCount do
   """
   @spec histogram([char]) :: map
   def histogram(strand) do
+    strand |> Enum.reduce( @nucleotides_histogram, fn c, count -> Map.update(count, c, 1, &(&1 + 1)) end )
   end
 end
