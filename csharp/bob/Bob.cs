@@ -10,6 +10,7 @@ public static class Bob
     public static string Response(string statement)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(isYellQuestion(statement))
         {
             return "Calm down, I know what I'm doing!";
@@ -34,6 +35,8 @@ public static class Bob
 
     private static bool askedQuestion(string statement)
 =======
+=======
+>>>>>>> 9d5c485b58ddbcd6a31e6dab1e2420e0879ed936
         if(IsYellQuestion(statement))
             return "Calm down, I know what I'm doing!";
         
@@ -50,13 +53,20 @@ public static class Bob
     }
 
     private static bool AskedQuestion(string statement)
+<<<<<<< HEAD
+>>>>>>> 9d5c485b58ddbcd6a31e6dab1e2420e0879ed936
+=======
 >>>>>>> 9d5c485b58ddbcd6a31e6dab1e2420e0879ed936
     {
         return Regex.Replace(statement, question_replacement_pattern, "").EndsWith("?");
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private static bool isYell(string statement)
+=======
+    private static bool IsYell(string statement)
+>>>>>>> 9d5c485b58ddbcd6a31e6dab1e2420e0879ed936
 =======
     private static bool IsYell(string statement)
 >>>>>>> 9d5c485b58ddbcd6a31e6dab1e2420e0879ed936
@@ -65,6 +75,7 @@ public static class Bob
         return cleanedStatement.ToUpper().EndsWith(cleanedStatement) && !String.IsNullOrWhiteSpace(cleanedStatement);
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     private static bool isYellQuestion(string statement)
     {
@@ -75,6 +86,8 @@ public static class Bob
     {
         return !String.IsNullOrWhiteSpace(statement);
 =======
+=======
+>>>>>>> 9d5c485b58ddbcd6a31e6dab1e2420e0879ed936
     private static bool IsYellQuestion(string statement)
     {
         return AskedQuestion(statement) && IsYell(statement);
@@ -83,6 +96,9 @@ public static class Bob
     private static bool OnlyAddressedWithGibberish(string statement)
     {
         return !string.IsNullOrWhiteSpace(statement);
+<<<<<<< HEAD
+>>>>>>> 9d5c485b58ddbcd6a31e6dab1e2420e0879ed936
+=======
 >>>>>>> 9d5c485b58ddbcd6a31e6dab1e2420e0879ed936
     }
 }
