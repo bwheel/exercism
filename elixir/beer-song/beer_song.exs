@@ -7,18 +7,19 @@ defmodule BeerSong do
   @spec verse(integer) :: String.t()
   def verse(number) do
     cond do
-      number > 1 -> 
-        """
+      number > 2 -> """
         #{number} bottles of beer on the wall, #{number} bottles of beer.
         Take one down and pass it around, #{number - 1} bottles of beer on the wall.
         """
-      number == 1 -> 
+      number == 2 -> """
+        2 bottles of beer on the wall, 2 bottles of beer.
+        Take one down and pass it around, 1 bottle of beer on the wall.
         """
+      number == 1 -> """
         1 bottle of beer on the wall, 1 bottle of beer.
         Take it down and pass it around, no more bottles of beer on the wall.
         """
-      number == 0 -> 
-        """
+      number == 0 ->  """
         No more bottles of beer on the wall, no more bottles of beer.
         Go to the store and buy some more, 99 bottles of beer on the wall.
         """
@@ -30,8 +31,16 @@ defmodule BeerSong do
   """
   @spec lyrics(Range.t()) :: String.t()
   def lyrics(range) do
-    if range > 0 do 
-      verse(range) <> lyrics(range - 1)
-    end
+    range
+    |> Enum.reduce("", fn i, result -> result <> verse(i) <> "\n" end) 
+    |> String.slice(0..-2) # remove the last extra newline.
+  end
+
+  @doc """
+  Get the entire beer song starting at 99.
+  """
+  @spec lyrics() :: String.t()
+  def lyrics() do
+    lyrics(99..0)
   end
 end
