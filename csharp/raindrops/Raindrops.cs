@@ -5,14 +5,10 @@ public static class Raindrops
 {
     public static string Convert(int number)
     {
-        var divisibles = Enumerable
+        var results = Enumerable
             .Range(1, number )
-            .Where( i => number % i == 0);               
-                
-        if(divisibles.Any( i => i ==3 || i == 5 || i == 7))
-        {
-            return divisibles
-                .Aggregate( string.Empty, ( s, i ) =>
+            .Where( i => number % i == 0)
+            .Aggregate( string.Empty, ( s, i ) =>
                     {
                         if( i == 3)
                         {
@@ -29,13 +25,8 @@ public static class Raindrops
                             return s + "Plong";
                         }
                         return s;
-                    });
-        }
-        else
-        {
-            return divisibles
-                    .Last()
-                    .ToString();
-        }
+                    });       
+                
+        return !string.IsNullOrWhiteSpace(results) ? results : number.ToString();        
     }
 }
