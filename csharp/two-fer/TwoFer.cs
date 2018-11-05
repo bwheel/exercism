@@ -2,9 +2,13 @@
 
   public static class TwoFer
   {
-      private const string template = "One for {0}, one for me.";
-      public static string Name(string input = null)
+      public static string Name(string input)
       {
-          return string.Format(template, input??"you");
+          return $"One for {input??"you"}, one for me.";
+      }
+
+      public static string Name()
+      {
+          return Name("you");
       }
   }
