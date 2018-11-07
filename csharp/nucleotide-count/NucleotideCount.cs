@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 public static class NucleotideCount
 {
-    public static IDictionary<char, int> Count(string sequence)
+    public static IReadOnlyDictionary<char, int> Count(string sequence)
     {
         if( !Regex.Match(sequence, "^([ACGTacgt]{0,})$").Success)
         {
