@@ -28,7 +28,7 @@ defmodule ListOps do
       _ -> filter(tail, f)
     end
   end
-
+  
   @type acc :: any
   @spec reduce(list, acc, (any, acc -> acc)) :: acc
   def reduce([], acc, _f), do: acc
@@ -39,13 +39,11 @@ defmodule ListOps do
   def append([], b), do: b
   def append([head|tail], b), do: [head | append( tail, b ) ]
 
-
   @spec concat([[any]]) :: [any]
-  def concat([]), do: []
-  #def concat(element), do: element
-  def concat([head|tail]) do
-    head ++ concat(tail)
-  end
-  
-  
+  def concat(list) when list == [], do: []
+  def concat(list), do: concat(list, []) |> reverse
+  def concat([head | tail], acc) when head == [], do: concat(tail, acc)
+  def concat([head | tail], acc) when is_list(head),  do: concat(tail, concat(head, acc) )
+  def concat([head | tail], acc), do: concat(tail, [head | acc])
+  def concat(_list, acc), do: acc
 end
