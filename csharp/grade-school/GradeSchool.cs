@@ -17,14 +17,9 @@ public class GradeSchool
 
     public IEnumerable<string> Roster()
     {
-        foreach (var grade in school.OrderBy( kv => kv.Key))
-        {
-            var students = grade.Value;
-            foreach (var student in students.OrderBy(s => s))
-            {
-                yield return student;
-            }
-        }
+        return school
+        .OrderBy(gradeToClassroom => gradeToClassroom.Key)
+        .SelectMany( (gradeToClassroom)=> gradeToClassroom.Value.OrderBy(student => student));
     }
 
     public IEnumerable<string> Grade(int grade)
