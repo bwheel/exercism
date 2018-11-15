@@ -47,10 +47,10 @@ public class KindergartenGarden
         char[] row2 = rows[1].ToCharArray();
         for(int i = 0; i < row1.Length; i+=2)
         {
-            Plant p1  = parsePlant(row1[i]);
-            Plant p2  = parsePlant(row1[i + 1]);
-            Plant p3  = parsePlant(row2[i]);
-            Plant p4  = parsePlant(row2[i + 1]);
+            Plant p1  = (Plant)row1[i];
+            Plant p2  = (Plant)row1[i + 1];
+            Plant p3  = (Plant)row2[i];
+            Plant p4  = (Plant)row2[i + 1];
             if(studentsPlants.TryGetValue(i, out Student student))
             {
                 student.plants.Add(p1);
@@ -61,25 +61,8 @@ public class KindergartenGarden
         }
     }
 
-    private Plant parsePlant(char c)
-    {
-        switch(c)
-        {
-            case 'V':
-                return Plant.Violets;
-            case 'R':
-                return Plant.Radishes;
-            case 'C':
-                return Plant.Clover;
-            case 'G':
-                return Plant.Grass;
-            default:
-                return default(Plant);
-        }
-    }
-
     public IEnumerable<Plant> Plants(string student)
     {
-        return studentsPlants.Values.First(s => s.Name == student).plants.ToArray();
+        return studentsPlants.Values.First(s => s.Name == student).plants;
     }
 }
