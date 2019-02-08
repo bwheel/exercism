@@ -1,62 +1,68 @@
 using System;
 
-public class Clock
+public class Clock : IEquatable<Clock>
 {
-    private int totalMinutes;
-    public int Hours 
-    {
-        get
-        {
-            int hours = totalMinutes / 60;
-            hours = hours % 24;
-
-            if (hours < 0)
-            {
-                hours = 24 + hours;
-            }
-            else if (hours == 0)
-            {
-                if(totalMinutes<0)
-                {
-                    hours = 23;
-                }
-                else
-                {
-                    hours = 0;
-                }
-            }
-            return hours;
-        }
-    }
-    public int Minutes 
-    {
-        get
-        {
-            int minutes = totalMinutes % 60;
-
-            return minutes < 0 ? minutes + 60 : minutes;
-        }
-    } 
-
     public Clock(int hours, int minutes)
     {
-        totalMinutes = minutes + (hours*60);
+        int hoursFromMinutes = 0;
+        if(minutes > 0)
+        {
+            while(minutes >= 60)
+            {
+                hoursFromMinutes ++;
+                minutes -= 60;
+            }
+        }
+        else
+        {
+            while(minutes <= -60)
+            {
+                hoursFromMinutes--;
+                minutes += 60;
+            }
+        }
+        Minutes = (minutes < 0) ? 60 + minutes: minutes;
+
+        hours = (minutes < 0) ?  hours + hoursFromMinutes - 1 :  hours + hoursFromMinutes;
+		
+        if(hours > 0)
+        {
+            while(hours >= 24)
+            {
+                hours-=24;
+            }
+        }
+        else
+        {
+            while(hours <= -24)
+            {
+                hours += 24;
+            }
+        }
+        Hours = (hours < 0) ? 24 + hours : hours;
     }
+
+    public int Hours { get; private set; }
+
+    public int Minutes { get; private set; }
 
     public Clock Add(int minutesToAdd)
     {
-        totalMinutes += minutesToAdd;
-        return this;
+        return new Clock(Hours, Minutes + minutesToAdd);
+    }
+
+    public bool Equals(Clock other)
+    {
+        return other != null && this.Hours == other.Hours && this.Minutes == other.Minutes;
     }
 
     public Clock Subtract(int minutesToSubtract)
     {
-        totalMinutes -= minutesToSubtract;
-        return this;
+        return this.Add(minutesToSubtract * -1);
     }
 
     public override string ToString()
     {
-        return $"{this.Hours.ToString().PadLeft(2, '0')}:{this.Minutes.ToString().PadLeft(2, '0')}";
+        return $"{Hours.ToString("00")}:{Minutes.ToString("00")}";
     }
 }
