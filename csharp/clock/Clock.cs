@@ -4,51 +4,32 @@ public class Clock : IEquatable<Clock>
 {
     public Clock(int hours, int minutes)
     {
-        int hoursFromMinutes = 0;
-        if(minutes > 0)
-        {
-            while(minutes >= 60)
-            {
-                hoursFromMinutes ++;
-                minutes -= 60;
-            }
-        }
-        else
-        {
-            while(minutes <= -60)
-            {
-                hoursFromMinutes--;
-                minutes += 60;
-            }
-        }
-        Minutes = (minutes < 0) ? 60 + minutes: minutes;
+        // keep track of the additional hours from the overflow minutes.
+        int hoursFromMinutes = minutes / 60;
 
+        // reduce minutes to base 60 (-60 < m < +60).
+        minutes = (minutes > 0) ? minutes % 60 : -1 * (Math.Abs(minutes) % 60);
+        
+        // take into account negative minutes
+        this.Minutes = (minutes < 0) ? 60 + minutes: minutes;
+
+        // add up the total hours, before reducing to base 24.
         hours = (minutes < 0) ?  hours + hoursFromMinutes - 1 :  hours + hoursFromMinutes;
-		
-        if(hours > 0)
-        {
-            while(hours >= 24)
-            {
-                hours-=24;
-            }
-        }
-        else
-        {
-            while(hours <= -24)
-            {
-                hours += 24;
-            }
-        }
-        Hours = (hours < 0) ? 24 + hours : hours;
+
+		// reduce to base 24 (outside the daily window -24 < h < +24).
+        hours = (hours > 0) ? hours % 24 : -1 * (Math.Abs(hours) % 24);
+
+        // take into accoutn negative hours
+        this.Hours = (hours < 0) ? 24 + hours : hours;
     }
 
-    public int Hours { get; private set; }
+    public int Hours { get; }
 
-    public int Minutes { get; private set; }
+    public int Minutes { get; }
 
     public Clock Add(int minutesToAdd)
     {
-        return new Clock(Hours, Minutes + minutesToAdd);
+        return new Clock(this.Hours, this.Minutes + minutesToAdd);
     }
 
     public bool Equals(Clock other)
@@ -63,6 +44,6 @@ public class Clock : IEquatable<Clock>
 
     public override string ToString()
     {
-        return $"{Hours.ToString("00")}:{Minutes.ToString("00")}";
+        return $"{Hours:00}:{Minutes:00}";
     }
 }
