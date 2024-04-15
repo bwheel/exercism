@@ -2,12 +2,10 @@
 
 
 let convert (number: int): string = 
-    let factors = 
-        [(3, "Pling");(5,"Plang");(7,"Plong")]
-        |> List.map (fun (f, txt) -> if number % f = 0 then txt else "" )
-        |> List.reduce(fun acc e -> acc + e )
+    [(3, "Pling");(5,"Plang");(7,"Plong")]
+        |> List.choose (fun (f, txt) -> if number % f = 0 then Some(txt) else None )
+        |> fun e -> match e with
+                                    | [] -> number |> string
+                                    | strs -> String.concat "" strs
 
-    if factors = "" then
-        number |> string
-    else
-        factors
+  
