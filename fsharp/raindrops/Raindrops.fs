@@ -1,15 +1,13 @@
 ﻿module Raindrops
 
-/// Euclidean remainder, the proper modulo operation
-let inline (%!) a b = (a % b + b) % b
 
 let convert (number: int): string = 
-    let isDivBy3 (num): bool = num %! 3 = 0
-    let isDivBy5 (num): bool = num %! 5 = 0
-    let isDivBy7 (num): bool = num %! 7 = 0
-    
-    let keys = [3; 5; 7]
-    
-    
+    let factors = 
+        [(3, "Pling");(5,"Plang");(7,"Plong")]
+        |> List.map (fun (f, txt) -> if number % f = 0 then txt else "" )
+        |> List.reduce(fun acc e -> acc + e )
 
-    ""
+    if factors = "" then
+        number |> string
+    else
+        factors
