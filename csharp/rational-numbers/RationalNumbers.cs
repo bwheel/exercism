@@ -11,73 +11,69 @@ public static class RealNumberExtension
 
 public struct RationalNumber
 {
-    private int numerator;
-    private int denominator;
-
+    public int Numerator { get; }
+    public int Denominator { get; }
     public RationalNumber(int numerator, int denominator)
     {
-        this.numerator = numerator;
-        this.denominator = denominator;
-    }
-
-    public RationalNumber Add(RationalNumber r)
-    {
-        return this + r;        
+        Numerator = numerator;
+        Denominator = denominator;
     }
 
     public static RationalNumber operator +(RationalNumber r1, RationalNumber r2)
     {
-        return new RationalNumber((r1.numerator * r2.denominator + r2.numerator * r1.denominator), (r1.denominator * r2.denominator));
-    }
-
-    public RationalNumber Sub(RationalNumber r)
-    {
-        return this - r;
+        var numerator = r1.Numerator * r2.Denominator + r1.Denominator * r2.Numerator;
+        var denominator = r1.Denominator * r2.Denominator;
+        return new RationalNumber(numerator, denominator);
     }
 
     public static RationalNumber operator -(RationalNumber r1, RationalNumber r2)
     {
-        return new RationalNumber( (r1.numerator * r2.denominator - r2.numerator * r1.denominator), (r1.denominator * r2.denominator) );
-    }
-
-    public RationalNumber Mul(RationalNumber r)
-    {
-        return this * r;
+        var numerator = r1.Numerator * r2.Denominator - r1.Denominator * r2.Numerator;
+        var denominator = r1.Denominator * r2.Denominator;
+        return new RationalNumber(numerator, denominator);
     }
 
     public static RationalNumber operator *(RationalNumber r1, RationalNumber r2)
     {
-        return new RationalNumber(r1.numerator * r1.denominator, r2.numerator * r2.denominator);
-    }
-
-    public RationalNumber Div(RationalNumber r)
-    {
-        return this / r;
+        var numerator = r1.Numerator * r2.Numerator;
+        var denominator = r1.Denominator * r2.Denominator;
+        return new RationalNumber(numerator, denominator).Reduce();
     }
 
     public static RationalNumber operator /(RationalNumber r1, RationalNumber r2)
     {
-        int denominator = r1.denominator * r2.numerator;
-        if( denominator < 0)
-            throw new ArgumentException();
-        return new RationalNumber( (r1.numerator * r2.denominator), denominator);
+        var numerator = r1.Numerator * r2.Denominator;
+        var denominator = r1.Denominator * r2.Numerator;
+        return new RationalNumber(numerator, denominator).Reduce();
     }
 
     public RationalNumber Abs()
     {
-        numerator = Math.Abs(numerator);
-        denominator = Math.Abs(denominator);
-        return this;
+        return new RationalNumber(Math.Abs(Numerator), Math.Abs(Denominator));
     }
 
     public RationalNumber Reduce()
     {
-        throw new NotImplementedException("You need to implement this function.");
+        var q = Denominator / Numerator;
+        var d = Denominator / q;
+        return new RationalNumber(q, d);
     }
 
     public RationalNumber Exprational(int power)
     {
-        throw new NotImplementedException("You need to implement this function.");
+        if (power >= 0)
+        {
+            var numerator = this.Numerator ^ power;
+            var denominator = this.Denominator ^ power;
+            return new RationalNumber(numerator, denominator);
+        }
+        else
+        {
+
+            var numerator = this.Denominator ^ Math.Abs(power);
+            var denominator = this.Numerator ^ Math.Abs(power);
+            return new RationalNumber(numerator, denominator);
+        }
     }
 
     public double Expreal(int baseNumber)
